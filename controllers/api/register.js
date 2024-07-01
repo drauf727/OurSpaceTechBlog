@@ -1,6 +1,10 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
+const express = require('express');
+router.use(express.json());
+router.use(express.urlencoded({ extended: true }));
+
 router.post('/', async (req, res) => {
     try {
       await User.create({
