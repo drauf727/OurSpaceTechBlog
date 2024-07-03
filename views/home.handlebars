@@ -1,17 +1,61 @@
+    {{!-- Area where posts will be displayed --}}
     <div class="container">
-        <h1>What Everyone Is Saying...</h1>
+        <div class="row mb-4">
+            <div class="col">
+                <h1>What Everyone Is Saying...</h1>
+            </div>
+            {{!-- Button to create a new post, will pop up a modal to submit a post --}}
+            <div class="col text-end">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newPostModal">CREATE A POST</button>
+            </div>
+        </div>
         <table class="table table-striped">
             <tbody>
+                {{!-- Pulling posts from API using handlebars and displaying them on the page --}}
                 {{#each postData}}
                     <tr>
-                        <td>{{this.title}}</td>
-                        <td class="text-end">Posted by: {{this.username}}</td>
+                        <td><strong>{{this.title}}</strong></td>
+                        <td class="text-end"><i>Posted by: {{this.username}} @ {{formatDate this.createdAt}}</i></td>
                     </tr>
                     <tr>
-                        <td colspan="2">{{this.post}} Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto, ut? Blanditiis atque soluta, pariatur facere repellendus tempora. Cumque officia consectetur repellat debitis molestiae, cum sed tenetur qui. Error, dolores! Voluptates.
+                        <td colspan="2">{{this.post}} 
                         </td>
                     </tr>
+                    {{!-- Using handlebars to now pull comments from API and display dynamically  --}}
+                    {{#each this.comments}}
+                        <tr>
+                            <td colspan="2" class="ps-4">
+                              {{this.comment}}  - <i>{{this.username}} @ {{formatDate this.createdAt}}</i>
+                            </td>
+                        </tr>
+                    {{/each}}
                 {{/each}}
             </tbody>
         </table>
     </div>
+
+
+{{!-- Modal for creating a new post --}}
+<div class="modal fade" id="newPostModal" tabindex="-1" aria-labelledby="newPostModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newPostModalLabel">Create New Post</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="newPostForm">
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="posttitle" required>
+          </div>
+          <div class="mb-3">
+            <label for="post" class="form-label">Post</label>
+            <textarea class="form-control" id="newpost" rows="3" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

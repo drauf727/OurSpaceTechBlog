@@ -10,7 +10,7 @@ router.post('/', async (req, res) => {
         await Post.create({
             username: req.body.username,
             title: req.body.title,
-            post: req.body.title
+            post: req.body.post
         });
         res.redirect('/');
     } catch (err) {

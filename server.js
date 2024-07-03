@@ -4,7 +4,15 @@ const session = require('express-session');
 const exphbs = require('express-handlebars');
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const hbs = exphbs.create({});
+const hbs = exphbs.create({
+  helpers: {
+      formatDate: function (dateString) {
+          const date = new Date(dateString);
+          const options = { year: '2-digit', month: '2-digit', day: '2-digit' };
+          return date.toLocaleDateString('en-US', options);
+      }
+  }
+});
 const routes = require('./controllers');
 
 const app = express();

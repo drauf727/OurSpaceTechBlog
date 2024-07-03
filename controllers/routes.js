@@ -14,6 +14,8 @@ router.get('/', async (req, res) => {
 
         const postData = posts.map((project) => project.get({ plain: true}));
 
+        console.log(JSON.stringify(postData, null, 2));
+
         res.render('home', {
             postData
         })
