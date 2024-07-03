@@ -1,19 +1,32 @@
-<h1>Register</h1>
+  <div class="container register-container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 text-center">
+        <h1 class="display-4">Register</h1>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <form class="form register-form bg-light">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input class="form-control" type="text" id="name" name="name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input class="form-control" type="email" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input class="form-control" type="password" id="password" name="password" required />
+          </div>
+          <div class="form-group text-center">
+            <button class="btn btn-primary btn-lg" type="submit">Register</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
-<form class="form register-form" action="/api/register" method="POST">
-  <div class="form-group">
-    <label for="email-login">Name</label>
-    <input class="form-input" type="text" id="name" name="name"/>
-  </div>
-  <div class="form-group">
-    <label for="email-login">Email</label>
-    <input class="form-input" type="text" id="email" name="email" />
-  </div>
-  <div class="form-group">
-    <label for="password-login">Password</label>
-    <input class="form-input" type="password" id="password" name="password" />
-  </div>
-  <div class="form-group">
-    <button class="btn btn-primary" type="submit">Register</button>
-  </div>
-</form>
+
+
+  <script src="/js/register.js"></script>

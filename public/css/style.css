@@ -1,3 +1,14 @@
 header {
     margin-bottom: 5vh;
 }
+
+.register-container {
+    margin-top: 50px;
+  }
+
+.register-form {
+    max-width: 500px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
