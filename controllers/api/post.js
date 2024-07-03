@@ -1,10 +1,22 @@
 const router = require('express').Router();
-const authenticator = require('../utils/authenticator');
-const { Post } = require('../models');
+const { Post } = require('../../models');
 
 const express = require('express');
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
+
+router.post('/', async (req, res) => {
+    try {
+        await Post.create({
+            username: req.body.username,
+            title: req.body.title,
+            post: req.body.title
+        });
+        res.redirect('/');
+    } catch (err) {
+        res.status(422).json({ message: err });
+    }
+});
 
 router.get('/', async (req, res) => {
     try {
@@ -20,19 +32,4 @@ router.get('/', async (req, res) => {
     } catch (err) {res.status(422).json({message: err})}
 } )
 
-router.get('/login', (req, res)=> {
-    res.render('login');
-});
-
-router.get('/register', (req, res)=> {
-    res.render('register');
-});
-
-router.get('/dashboard', authenticator, async (req, res) => {
-    const userEmail = req.session.email;
-    res.render('dashboard', { email: userEmail });
-    
-})
-
-
-module.exports = router 
+module.exports = router;

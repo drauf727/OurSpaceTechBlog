@@ -1,1 +1,17 @@
-<h1>Testing</h1>
+    <div class="container">
+        <h1>What Everyone Is Saying...</h1>
+        <table class="table table-striped">
+            <tbody>
+                {{#each postData}}
+                    <tr>
+                        <td>{{this.title}}</td>
+                        <td class="text-end">Posted by: {{this.username}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">{{this.post}} Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto, ut? Blanditiis atque soluta, pariatur facere repellendus tempora. Cumque officia consectetur repellat debitis molestiae, cum sed tenetur qui. Error, dolores! Voluptates.
+                        </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
