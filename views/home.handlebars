@@ -14,11 +14,14 @@
                 {{!-- Pulling posts from API using handlebars and displaying them on the page --}}
                 {{#each postData}}
                     <tr>
-                        <td><strong>{{this.title}}</strong></td>
+                        <td><strong><h3>{{this.title}}</h3></strong></td>
                         <td class="text-end"><i>Posted by: {{this.username}} @ {{formatDate this.createdAt}}</i></td>
                     </tr>
                     <tr>
                         <td colspan="2">{{this.post}} 
+                                                        <div class="text-end mt-2">
+                                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#commentModal" data-post-id="{{this.id}}">Comment</button>
+                            </div>
                         </td>
                     </tr>
                     {{!-- Using handlebars to now pull comments from API and display dynamically  --}}
@@ -59,3 +62,26 @@
     </div>
   </div>
 </div>
+
+
+    {{!-- Modal for adding a comment to a post --}}
+    <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="commentModalLabel">Leave a Comment</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="newCommentForm">
+              <input type="hidden" id="postId">
+              <div class="mb-3">
+                <label for="commentText" class="form-label">Comment</label>
+                <textarea class="form-control" id="commentText" rows="3" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>

@@ -14,8 +14,6 @@ router.get('/', async (req, res) => {
 
         const postData = posts.map((project) => project.get({ plain: true}));
 
-        console.log(JSON.stringify(postData, null, 2));
-
         res.render('home', {
             postData
         })
@@ -32,9 +30,21 @@ router.get('/register', (req, res)=> {
 
 router.get('/dashboard', authenticator, async (req, res) => {
     const userEmail = req.session.email;
-    res.render('dashboard', { email: userEmail });
-    
-})
 
+    try {
+        const userPosts = await Post.findAll({
+            where: {
+                username: userEmail
+            },
+            include: [{ all: true }]
+        });
+
+        const postData = userPosts.map((project) => project.get({ plain: true}));
+
+    res.render('dashboard', { email: userEmail, postData });
+    } catch(err){
+        res.status(422).json(err)
+    } 
+    })
 
 module.exports = router 
